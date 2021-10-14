@@ -1,5 +1,5 @@
 ---
-title: "Homework_3"
+title: "Homework 3"
 author: "Warrenkevin Henderson"
 date: "07OCT21"
 output:
@@ -13,7 +13,7 @@ library(ggplot2)
 Zombies <- read.csv(header = TRUE, "https://raw.githubusercontent.com/fuzzyatelin/fuzzyatelin.github.io/master/AN588_Fall21/zombies.csv")
 head(Zombies)
 ```
-#### Calculate the population mean and standard deviation for each quantitative random variable (height, weight, age, number of zombies killed, and years of education). NOTE: You will not want to use the built in var() and sd() commands as these are for samples.
+#### Calculate the population mean and standard deviation for each quantitative random variable (height, weight, age, number of zombies killed, and years of education). NOTE: You will not want to use the built in var() and sd() commands as these are for samples
 ```{r}
 mean(Zombies$height)
 mean(Zombies$weight)
@@ -22,7 +22,6 @@ mean(Zombies$zombies_killed)
 mean(Zombies$years_of_education)
 
 ```
-#ejv98: I got the same values! Runs well
 
 #### Use {ggplot} to make boxplots of each of these variables by gender
 ```{r}
@@ -52,10 +51,7 @@ ggplot(Zombies, aes(x=gender, y= years_of_education)) +
   geom_boxplot(aes(fill=gender)) + 
   labs(title="Height vs Education", x="Gender", y="Years of Education") + theme_bw()
 ```
-#ejv98: Box Plots look good! I like the way you color coded them. 
-
 #### Use {ggplot} to make scatterplots of height and weight in relation to age. Do these variables seem to be related? In what way?
-
 ```{r}
 attach(Zombies)
 plot(age, height, main="Age vs Height", 
@@ -76,8 +72,6 @@ qplot(weight, main = "original")
 shapiro.test(weight)
 qqnorm(weight)
 ```
-
-mass function
 #### Answer: There is a linear realtionship in the Q-Q plot and the graphs are normally distributed. 
 
 #### Now use the sample() function to sample ONE subset of 30 zombie survivors (without replacement) from this population and calculate the mean and sample standard deviation for each variable. Also estimate the standard error for each variable, and construct the 95% confidence interval for each mean. Note that for the variables that are not drawn from the normal distribution, you may need to base your estimate of the CIs on slightly different code than for the normal…
@@ -105,8 +99,6 @@ Standard_Error(Sample_30$height)
 Standard_Error(Sample_30$weight)
 Standard_Error(Sample_30$zombies_killed)
 Standard_Error(Sample_30$years_of_education)
-
-
 ```
 #### Now draw 99 more random samples of 30 zombie apocalypse survivors, and calculate the mean for each variable for each of these samples. Together with the first sample you drew, you now have a set of 100 means for each variable (each based on 30 observations), which constitutes a sampling distribution for each variable. What are the means and standard deviations of this distribution of means for each variable? How do the standard deviations of means compare to the standard errors estimated in [5]? What do these sampling distributions look like (a graph might help here)? Are they normally distributed? What about for those variables that you concluded were not originally drawn from a normal distribution?
 
@@ -119,4 +111,63 @@ for (i in 1:N) {
 }
 head(W)
 ```
-#ejv98: Everything seems to run well. I got similar/the same answers as yours! Nice job. 
+```{r}
+m <- NULL
+for (i in 1:N) {
+    m[i] <- mean(W[[i]])
+}
+mean(m)
+```
+```{R}
+N <- 99
+T <-30
+W <- NULL
+for (i in 1:N) {
+     W[[i]] <- sample(Zombies$weight, size = T, replace = FALSE)}
+
+head(W)
+
+m <- NULL
+for (i in 1:N) {
+    m[i] <- mean(W[[i]])
+}
+mean(m)
+```
+
+```{r}
+for (i in 1:N) {
+     W[[i]] <- sample(Zombies$height, size = T, replace = FALSE)}
+mean(m)
+
+m <- NULL
+for (i in 1:N) {
+    m[i] <- mean(W[[i]])
+}
+mean(m)
+
+
+N <- 99
+T <-30
+W <- NULL
+ for (i in 1:N) {
+     W[[i]] <- sample(Zombies$zombies_killed, size = T, replace = FALSE)}
+
+m <- NULL
+for (i in 1:N) {
+    m[i] <- mean(W[[i]])
+}
+mean(m)
+ 
+N <- 99
+T <-30
+W <- NULL
+ for (i in 1:N) {
+     W[[i]] <- sample(Zombies$years_of_education, size = T, replace = FALSE)}
+
+m <- NULL
+for (i in 1:N) {
+    m[i] <- mean(W[[i]])
+}
+mean(m)
+```
+
