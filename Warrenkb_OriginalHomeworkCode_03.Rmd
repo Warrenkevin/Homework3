@@ -22,6 +22,7 @@ mean(Zombies$zombies_killed)
 mean(Zombies$years_of_education)
 
 ```
+#ejv98: I got the same values! Runs well
 
 #### Use {ggplot} to make boxplots of each of these variables by gender
 ```{r}
@@ -51,7 +52,10 @@ ggplot(Zombies, aes(x=gender, y= years_of_education)) +
   geom_boxplot(aes(fill=gender)) + 
   labs(title="Height vs Education", x="Gender", y="Years of Education") + theme_bw()
 ```
+#ejv98: Box Plots look good! I like the way you color coded them. 
+
 #### Use {ggplot} to make scatterplots of height and weight in relation to age. Do these variables seem to be related? In what way?
+
 ```{r}
 attach(Zombies)
 plot(age, height, main="Age vs Height", 
@@ -111,3 +115,4 @@ for (i in 1:N) {
 }
 head(W)
 ```
+#ejv98: Everything seems to run well. I got similar/the same answers as yours! Nice job. 
